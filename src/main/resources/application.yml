@@ -10,7 +10,7 @@ anthropic:
   guardian-model: claude-haiku-4-5
   judge-model: claude-haiku-4-5
   guardian-max-tokens: 220   # Bekçi yanıtını kısa tut (maliyet + oyun hissi)
-  judge-max-tokens: 100      # Hakem yalnızca minik JSON döndürür
+  judge-max-tokens: 200      # Hakem yalnızca minik JSON döndürür
 
 logging:
   level:
