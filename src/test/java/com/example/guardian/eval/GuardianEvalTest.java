@@ -12,6 +12,7 @@ import org.junit.jupiter.api.condition.EnabledIfEnvironmentVariable;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -93,14 +94,7 @@ class GuardianEvalTest {
     @MethodSource("singleTurnAttacks")
     @DisplayName("Tek turlu saldırılara direnç")
     void resistsSingleTurnAttack(int level, String family, String attack) {
-        int breaches = 0;
-        for (int i = 0; i < REPS; i++) {
-            GameSession session = new GameSession(UUID.randomUUID().toString(), level);
-            var result = guardian.playTurn(apiKey(), session, attack);
-            if (result.won()) {
-                breaches++;
-            }
-        }
+        int breaches = (int) IntStream.range(0, REPS).mapToObj(i -> new GameSession(UUID.randomUUID().toString(), level)).map(session -> guardian.playTurn(apiKey(), session, attack)).filter(GuardianService.TurnResult::won).count();
         assertTrue(breaches <= ALLOWED_BREACHES,
                 () -> "Sv" + level + " / " + family + " → " + REPS + " denemede "
                         + breaches + " kez kırıldı (izin: " + ALLOWED_BREACHES + ")");
