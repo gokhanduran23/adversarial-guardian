@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+anthropic:
+  base-url: https://api.anthropic.com
+  version: "2023-06-01"
+  # Ucuz model kullan — bu oyun frontier model istemez, üstelik ucuz model
+  # daha kolay "kırıldığı" için oyun bir tık daha eğlenceli olur.
+  # DİKKAT: model string'leri zamanla değişir; güncel adları docs.claude.com'dan teyit et.
+  guardian-model: claude-haiku-4-5
+  judge-model: claude-haiku-4-5
+  guardian-max-tokens: 220   # Bekçi yanıtını kısa tut (maliyet + oyun hissi)
+  judge-max-tokens: 100      # Hakem yalnızca minik JSON döndürür
+
+logging:
+  level:
+    root: INFO
+    # DİKKAT: istek gövdesini DEBUG'ta bile loglama — BYOK anahtarı sızabilir.

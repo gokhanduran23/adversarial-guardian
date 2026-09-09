@@ -1,0 +1,5 @@
+target/
+.idea/
+*.iml
+http-client.env.json
+.DS_Storesrc/main/resources/prompts/key
